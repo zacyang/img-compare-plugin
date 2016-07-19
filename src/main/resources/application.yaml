@@ -1,0 +1,4 @@
+firstCompareCandidateDir  : /home/yyang/projects/mail-routing-ui/frontend/pre_screenshoots/screenshots/firefox
+secondCompareCandidateDir : /home/yyang/projects/mail-routing-ui/frontend/build/screenshots/firefox
+outPutDir : /home/yyang/projects/mail-routing-ui/frontend/result/
+pathOfDataJs : /home/yyang/playground/com-aconex-yang-img-comparator/src/main/resources/data.js
