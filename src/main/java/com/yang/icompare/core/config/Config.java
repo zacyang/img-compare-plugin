@@ -2,6 +2,13 @@ package com.yang.icompare.core.config;
 
 public class Config {
 
+    public Config(String firstCompareCandidateDir, String secondCompareCandidateDir, String outPutDir, String pathOfDataJs) {
+        this.firstCompareCandidateDir = firstCompareCandidateDir;
+        this.secondCompareCandidateDir = secondCompareCandidateDir;
+        this.outPutDir = outPutDir;
+        this.pathOfDataJs = pathOfDataJs;
+    }
+
     private String firstCompareCandidateDir;
     private String secondCompareCandidateDir;
     private String outPutDir;

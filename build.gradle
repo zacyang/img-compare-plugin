@@ -1,9 +1,10 @@
-group 'com.aconex.yang'
+group 'com.yang.icompare'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'maven-publish'
+apply plugin: 'maven'
 
 sourceCompatibility = 1.8
 
@@ -43,18 +44,18 @@ dependencies {
     )
 }
 
-group = 'com.yang.icompare'
-version = '1.0.0'
-
-
 publishing {
     publications {
         maven(MavenPublication) {
             groupId "$group"
-            artifactId 'ImgComparePlugin'
+            artifactId 'img-compare'
             version "$version"
             from components.java
         }
+
+    }
+    repositories{
+        mavenLocal()
     }
 }
 uploadArchives {

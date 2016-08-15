@@ -2,6 +2,7 @@ package com.yang.icompare.core.config;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -10,12 +11,15 @@ import com.google.common.io.Resources;
 import org.apache.commons.lang3.StringUtils;
 
 public class ConfigInitializer {
+
+    private static final String APPLICATION_YAML = "application.yaml";
+
     private  Config generateDefaultConfig() {
         try {
-            return getConfigFromFile(new File(Resources.getResource("application.yaml").getFile()));
+            URL resource = Resources.getResource(APPLICATION_YAML);
+            return getConfigFromFile(new File(resource.getFile()));
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            return new Config("/home/yyang/projects/mail-routing-ui/frontend/pre_screenshoots/screenshots/firefox", "/home/yyang/projects/mail-routing-ui/frontend/after_screenshots", "/home/yyang/projects/mail-routing-ui/frontend/result/", "/home/yyang/playground/com-aconex-yang-img-comparator/src/main/resources/data.js");
         }
     }
 
