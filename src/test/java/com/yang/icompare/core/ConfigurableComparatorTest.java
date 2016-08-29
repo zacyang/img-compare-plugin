@@ -49,9 +49,7 @@ public class ConfigurableComparatorTest {
         initMocks(this);
         configInit();
 
-        String configPath = "/configPath";
-
-        classUnderTest = new ConfigurableComparator(comparator, generator, candidateExtractor, configInitializer, configPath);
+        classUnderTest = new ConfigurableComparator(comparator, generator, candidateExtractor, config);
     }
 
     @Test

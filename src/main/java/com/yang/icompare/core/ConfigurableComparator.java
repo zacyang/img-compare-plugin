@@ -7,38 +7,33 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import com.yang.icompare.core.config.Config;
-import com.yang.icompare.core.config.ConfigInitializer;
-import com.yang.icompare.extractor.CompareCandidatesExtractor;
-import com.yang.icompare.core.generator.OverlapDiffGenerator;
 import com.yang.icompare.core.comparator.PixelComparator;
+import com.yang.icompare.core.config.Config;
+import com.yang.icompare.core.generator.OverlapDiffGenerator;
+import com.yang.icompare.extractor.CompareCandidatesExtractor;
 
 public class ConfigurableComparator {
+    final private PixelComparator comparator;
+    final private OverlapDiffGenerator generator;
+    final private CompareCandidatesExtractor extractor;
     final private Config config;
-    final private PixelComparator pixelComparator;
-    final private OverlapDiffGenerator overlapDiffGenerator;
-    final private CompareCandidatesExtractor compareCandidatesExtractor;
 
-    public ConfigurableComparator(PixelComparator pixelComparator,
-                                  OverlapDiffGenerator overlapDiffGenerator,
-                                  CompareCandidatesExtractor compareCandidatesExtractor,
-                                  ConfigInitializer initializer,
-                                  String configurationPath) {
-        this.pixelComparator = pixelComparator;
-        this.overlapDiffGenerator = overlapDiffGenerator;
-        this.compareCandidatesExtractor = compareCandidatesExtractor;
-        this.config = initializer.initConfig(configurationPath);
+    public ConfigurableComparator(final PixelComparator comparator,
+                                  final OverlapDiffGenerator generator,
+                                  final CompareCandidatesExtractor extractor,
+                                  final Config config) {
+        this.comparator = comparator;
+        this.generator = generator;
+        this.extractor = extractor;
+        this.config = config;
     }
 
 
     public List<Result> compare() throws IOException {
-        //config
         final Map<String, List<File>> testCandidateMap =
-                compareCandidatesExtractor.extractorCompareCandidateFiles(
+                extractor.extractorCompareCandidateFiles(
                         config.getFirstCompareCandidateDir(),
                         config.getSecondCompareCandidateDir());
-
-        //compare
 
         final List<Result> results = newArrayList();
 
@@ -49,11 +44,10 @@ public class ConfigurableComparator {
     }
 
     private Result generateComparingReport(File first, File second, String outPutDir) {
-        Result result = this.pixelComparator.compare(first, second, null);
+        Result result = this.comparator.compare(first, second, null);
         if (!result.isIdentical()) {
-            result = overlapDiffGenerator.report(first, second, outPutDir, result);
+            result = generator.report(first, second, outPutDir, result);
         }
         return result;
     }
-
 }
