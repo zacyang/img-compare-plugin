@@ -1,6 +1,7 @@
 package com.yang.icompare.core.config;
 
 public class Config {
+    public Config() {}
 
     public Config(String firstCompareCandidateDir, String secondCompareCandidateDir, String outPutDir, String pathOfDataJs) {
         this.firstCompareCandidateDir = firstCompareCandidateDir;

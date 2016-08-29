@@ -16,15 +16,13 @@ repositories {
 
 dependencies {
     compile(
-            gradleApi(),
             "org.apache.commons:commons-lang3:$appachCommonVersion",
             "com.google.guava:guava:$guavaVersion",
             "org.slf4j:slf4j-simple:$slf4jVersion",
             "org.thymeleaf:thymeleaf:$thymeleafVersion",
             "commons-cli:commons-cli:$cliVersion",
-            "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion",
-            "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
-            "commons-cli:commons-cli:$commonCliVersion"
+            "com.fasterxml.jackson.core:jackson-databind:$jacksonCoreVersion",
+            "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonCoreVersion",
 
     )
     testCompile(

@@ -2,7 +2,6 @@ package com.yang.icompare.core.config;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -13,21 +12,23 @@ import org.apache.commons.lang3.StringUtils;
 public class ConfigInitializer {
 
     private static final String APPLICATION_YAML = "application.yaml";
+    private static final Config CONFIG = new Config("base", "after", "result", "data.js");
+    private static final File DEFAULT_CONFIG_FILE = new File(Resources.getResource(APPLICATION_YAML).getFile());
 
-    private  Config generateDefaultConfig() {
+    public Config initConfig(String filePath) {
         try {
-            URL resource = Resources.getResource(APPLICATION_YAML);
-            return getConfigFromFile(new File(resource.getFile()));
+            return getConfigFromFile(getConfigurationFile(filePath));
         } catch (IOException e) {
-            return new Config("/home/yyang/projects/mail-routing-ui/frontend/pre_screenshoots/screenshots/firefox", "/home/yyang/projects/mail-routing-ui/frontend/after_screenshots", "/home/yyang/projects/mail-routing-ui/frontend/result/", "/home/yyang/playground/com-aconex-yang-img-comparator/src/main/resources/data.js");
+            return CONFIG;
         }
     }
 
-    public Config initConfig(String config) {
+    private File getConfigurationFile(String config) {
         try {
-            return getConfigFromFile(new File(Resources.getResource(config).getFile()));
-        } catch (IOException e) {
-            return generateDefaultConfig();
+            File file = new File(Resources.getResource(config).getFile());
+            return file;
+        } catch (IllegalArgumentException e) {
+            return DEFAULT_CONFIG_FILE;
         }
     }
 
